@@ -28,6 +28,8 @@ public class Launcher {
     private static final Logger LOGGER = LoggerFactory.getLogger(Launcher.class);
 
     public static void main(String[] args) throws Exception {
+        Long elapsedTime = System.currentTimeMillis();
+
         // 런처 파라미터를 파싱한다.
         ArgumentParser argumentParser = ArgumentParsers.newArgumentParser("Crawler").defaultHelp(true).description("Web crawler for electronics data");
         argumentParser.addArgument("-d", "--dir").dest("dir").setDefault(".").help("Directory for crawled data");
@@ -100,5 +102,9 @@ public class Launcher {
         }
         out.close();
         hfs.close();
+
+        elapsedTime = System.currentTimeMillis() - elapsedTime;
+
+        LOGGER.info("ELAPSED TIME: {}", elapsedTime);
     }
 }
