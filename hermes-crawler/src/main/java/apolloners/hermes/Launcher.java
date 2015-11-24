@@ -31,7 +31,7 @@ public class Launcher {
         // 런처 파라미터를 파싱한다.
         ArgumentParser argumentParser = ArgumentParsers.newArgumentParser("Crawler").defaultHelp(true).description("Web crawler for electronics data");
         argumentParser.addArgument("-d", "--dir").dest("dir").setDefault(".").help("Directory for crawled data");
-        argumentParser.addArgument("-h", "--hdfs").dest("hdfs").required(true).help("HDFS Remote Host:Port");
+        argumentParser.addArgument("-r", "--remote").dest("remote").required(true).help("HDFS Remote Address");
         argumentParser.addArgument("-o", "--output").dest("output").required(true).help("HDFS Output Path");
 
         Namespace namespace = null;
@@ -44,12 +44,12 @@ public class Launcher {
 
         // 파라미터로 가져온 값을 할당한다.
         String dir = namespace.getString("dir");
-        String hdfs = namespace.getString("hdfs");
+        String remote = namespace.getString("remote");
         String output = namespace.getString("output");
 
         // 하둡 설정 및 파일시스템을 불러온다.
         Configuration hdfsConf = new Configuration();
-        hdfsConf.set("fs.default.name", hdfs);
+        hdfsConf.set("fs.default.name", remote);
         FileSystem hfs = FileSystem.get(hdfsConf);
 
         // 출력 파일이 존재하면 삭제한다.
