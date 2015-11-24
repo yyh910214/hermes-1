@@ -71,7 +71,6 @@ public class Launcher {
         crawlConfig.setMaxTotalConnections(15);
         crawlConfig.setSocketTimeout(10000);
         crawlConfig.setConnectionTimeout(1000);
-        crawlConfig.setMaxPagesToFetch(100); // For debug
 
         RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
         robotstxtConfig.setUserAgentName("apolloners");
@@ -97,7 +96,7 @@ public class Launcher {
         for (Object localData : crawlController.getCrawlersLocalData()) {
             List<ProductchartSmartphones> productchartSmartphonesList = (List<ProductchartSmartphones>) localData;
             for (ProductchartSmartphones productchartSmartphones : productchartSmartphonesList) {
-                out.writeUTF(productchartSmartphones.toString() + "\n");
+                out.writeUTF(productchartSmartphones.toString() + "\r\n");
             }
         }
         out.close();
