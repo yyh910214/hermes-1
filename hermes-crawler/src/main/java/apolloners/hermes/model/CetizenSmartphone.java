@@ -226,7 +226,9 @@ public class CetizenSmartphone {
 		for(Field field : fields)	{
 			field.setAccessible(true);
 			try {
-				toStringHelper.add(field.getName(), field.get(this));
+				if(!field.getName().equals("LOGGER"))	{
+					toStringHelper.add(field.getName(), field.get(this));
+				}
 			} catch (Exception e) {
 				LOGGER.error("CETIZEN TOSTRING ERROR");
 				LOGGER.error(e.getMessage());
